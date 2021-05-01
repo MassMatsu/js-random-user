@@ -25,7 +25,6 @@ const setUser = async () => {
   const street = `${stNumber} ${stName}`
 
   img.src = image
-  userTitleEl.textContent = `My ${name} is`
   userValueEl.textContent = name;
 
   iconsEl.map((icon) => {
@@ -34,15 +33,35 @@ const setUser = async () => {
       // check if anyone has active class and remove it before add
       iconsEl.forEach((icon) => {
         if (icon.classList.contains('active')) {
-          console.log(icon);
+          //console.log(icon);
           icon.classList.remove('active');
         }
       });
-
-      console.log(e.currentTarget.dataset.label);
-      
-      console.log(icon);
-  
+      let label = e.currentTarget.dataset.label;
+      userTitleEl.textContent = `My ${label} is`
+      console.log(label)
+      let value = ''
+      if (label === 'name') {
+        value = name
+      }
+      if (label === 'email') {
+        value = email
+      }
+      if (label === 'age') {
+        value = age
+        console.log(age)
+      }
+      if (label === 'street') {
+        value = street
+      }
+      if (label === 'phone') {
+        value = phone
+      }
+      if (label === 'password') {
+        value = password
+      }
+      console.log(value)
+      userValueEl.textContent = value
       icon.classList.add('active');
 
     });
