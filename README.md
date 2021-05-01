@@ -1,5 +1,5 @@
 ##### random user
-it is an imitation of Random User Generator home page generating random user information.
+it is an imitation of Random User Generator home page which generates random user information.
 
 ##### features
 - [X] generate a random user by clicking RAMDOM USER button
@@ -11,5 +11,6 @@ it is an imitation of Random User Generator home page generating random user inf
 - set label property on each icon by utilizing html data- property. its values are set to match with the properties of data fetched from API
 
 ##### demo
-![js-random-user](https://user-images.githubusercontent.com/66154455/116774052-c90ebc80-aa94-11eb-93ee-cf7edb7ebade.gif)
+<img src="https://user-images.githubusercontent.com/66154455/116774052-c90ebc80-aa94-11eb-93ee-cf7edb7ebade.gif" width="400">
+
 
