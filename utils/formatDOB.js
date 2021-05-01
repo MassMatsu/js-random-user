@@ -5,5 +5,3 @@ export const formatDOB = (date) => {
 
   return dob
 }
-
-formatDOB('1981-01-31T22:43:17.154Z')
