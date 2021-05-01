@@ -1,73 +1,51 @@
-import { fetchUser } from './utils/requests.js';
 import { selector } from './utils/selector.js';
+import {getUser} from './utils/getUser.js'
+import './utils/formatDOB.js'
 
 const img = selector('img');
 const buttonEl = selector('.btn');
 const userTitleEl = selector('.user-title');
 const userValueEl = selector('.user-value');
-const iconEl = selector('.icon');
 // transform array like to array
 const iconsEl = Array.from(document.querySelectorAll('.icon'));
 
-const setUser = async () => {
-  const user = await fetchUser();
-  
-  const {
-    picture:{large:image},
-    name:{first:firstName, last:lastName},
-    email,
-    dob:{age},
-    location:{street:{number:stNumber, name:stName}},
-    cell:phone,
-    login:{password}
-  } = user
-  const name = `${firstName} ${lastName}`
-  const street = `${stNumber} ${stName}`
 
-  img.src = image
+const displayUser = async () => {
+  const user = await getUser()
+  const {image, name} = user
+
+  // setup for inital rendering
+  img.src = image;
+  userTitleEl.textContent = `My ${name} is`;
   userValueEl.textContent = name;
 
+  // set event listener on icons
   iconsEl.map((icon) => {
-    icon.addEventListener('click', (e) => {
+    icon.addEventListener('mouseover', (e) => {
+      // set title of info display My ... is
+      let label = e.currentTarget.dataset.label;
+      userTitleEl.textContent = `My ${label} is`;
+
+      // link selected icon and value of user info
+      userValueEl.textContent = user[label];
 
       // check if anyone has active class and remove it before add
       iconsEl.forEach((icon) => {
         if (icon.classList.contains('active')) {
-          //console.log(icon);
           icon.classList.remove('active');
         }
       });
-      let label = e.currentTarget.dataset.label;
-      userTitleEl.textContent = `My ${label} is`
-      console.log(label)
-      let value = ''
-      if (label === 'name') {
-        value = name
-      }
-      if (label === 'email') {
-        value = email
-      }
-      if (label === 'age') {
-        value = age
-        console.log(age)
-      }
-      if (label === 'street') {
-        value = street
-      }
-      if (label === 'phone') {
-        value = phone
-      }
-      if (label === 'password') {
-        value = password
-      }
-      console.log(value)
-      userValueEl.textContent = value
       icon.classList.add('active');
-
     });
   });
 };
 
-buttonEl.addEventListener('click', () => {});
 
-setUser();
+// set random user generate button
+buttonEl.addEventListener('click', () => {
+  displayUser()
+});
+
+// inital event at DOM content loaded for inital rendering
+window.addEventListener('DOMContetdLoaded', displayUser())
+
