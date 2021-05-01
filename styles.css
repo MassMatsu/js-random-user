@@ -201,9 +201,9 @@ p {
 .user-value {
   color: var(--clr-grey-1);
   font-size: 28px;
-  overflow-x: scroll;
-  overflow-y: hidden;
-  
+  /* overflow-x: scroll;
+  overflow-y: hidden; */
+  word-wrap: break-word;
 }
 
 .values-list {
